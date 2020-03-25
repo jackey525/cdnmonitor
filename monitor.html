@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Monitor</title>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
             crossorigin="anonymous"></script>
 </head>
@@ -11,15 +12,15 @@
 <div style="width:250px;height:150px;color: brown">
 
     <div id="test">
-        Auto TEST   <input id="stop" type="button" value="停止測試"><input id="start" type="button" value="開始測試">
+        Auto TEST <input id="stop" type="button" value="停止測試"><input id="start" type="button" value="開始測試">
     </div>
     <br>
     <div>
-        repeatTime  <select id="repeatTime" name="repeatTime">
+        repeatTime <select id="repeatTime" name="repeatTime">
         <option value="20000">20</option>
         <option value="30000">30</option>
         <option value="60000">60</option>
-    </select>  seconds
+    </select> seconds
     </div>
     <br>
     <div>
@@ -27,23 +28,31 @@
     </div>
     <div id="target">
         <div>
-        <a href="https://skycdn.nrmhp.com/webedit/it.jpg">sky</a>
-        </div><div>
-        <a href="https://www.echuxi.cn/webedit/it.jpg">cdnnetwork</a>
-        </div><div>
-        <a href="https://cf.nrmhp.com/webedit/it.jpg">cf</a>
-        </div><div>
-        <a href="https://alicdn.nrmhp.com/webedit/it.jpg">ali</a>
-        </div><div>
-        <a href="https://google.nrmhp.com/webedit/it.jpg">google</a>
-        </div><div>
-        <a href="https://d1vzrgzh4sk03k.cloudfront.net/webedit/it.jpg">aws</a>
-        </div><div>
-        <a href="https://tscdn.xldmo.cn/webedit/it.jpg">ts</a>
-        </div><div>
-        <a href="https://alica.echuxi.cn/webedit/it.jpg">ali_in_china</a>
-        </div><div>
-        <a href="https://akamai.nrmhp.com/webedit/it.jpg">akamai</a>
+            <a href="https://skycdn.nrmhp.com/webedit/it.jpg">sky</a>
+        </div>
+        <div>
+            <a href="https://www.echuxi.cn/webedit/it.jpg">cdnnetwork</a>
+        </div>
+        <div>
+            <a href="https://cf.nrmhp.com/webedit/it.jpg">cf</a>
+        </div>
+        <div>
+            <a href="https://alicdn.nrmhp.com/webedit/it.jpg">ali</a>
+        </div>
+        <div>
+            <a href="https://google.nrmhp.com/webedit/it.jpg">google</a>
+        </div>
+        <div>
+            <a href="https://d1vzrgzh4sk03k.cloudfront.net/webedit/it.jpg">aws</a>
+        </div>
+        <div>
+            <a href="https://tscdn.xldmo.cn/webedit/it.jpg">ts</a>
+        </div>
+        <div>
+            <a href="https://alica.echuxi.cn/webedit/it.jpg">ali_in_china</a>
+        </div>
+        <div>
+            <a href="https://akamai.nrmhp.com/webedit/it.jpg">akamai</a>
         </div>
     </div>
     <br>
@@ -59,7 +68,8 @@
         <div id="result" style="color: blue">
 
         </div>
-        apiResult<div id="apiResult" style="color: blue">
+        apiResult
+        <div id="apiResult" style="color: blue">
 
         </div>
     </div>
@@ -75,25 +85,26 @@
 </body>
 <script>
 
-    var start_time1,start_time2,start_time3,userdata,userAlldata;
-    $(function() {
+    var start_time1, start_time2, start_time3, userdata, userAlldata;
+    $(function () {
         $('#start').hide();
-        var timerId,ajaxtimerId;
-        $('#stop').click(function(e) {
+        var timerId;
+        // var ajaxtimerId;
+        $('#stop').click(function (e) {
             clearTimeout(timerId);
-            clearTimeout(ajaxtimerId);
+            // clearTimeout(ajaxtimerId);
             $(this).hide();
             $('#start').show();
         })
-        $('#start').click(function(e) {
+        $('#start').click(function (e) {
             clearTimeout(timerId);
-            clearTimeout(ajaxtimerId);
-            $('#all a').trigger( "click" );
+            // clearTimeout(ajaxtimerId);
+            $('#all a').trigger("click");
             $(this).hide();
             $('#stop').show();
         })
         //取得使用者資訊
-        $.fn.user = function(){
+        $.fn.user = function () {
             $.ajax({
                 cache: false,
                 url: "https://pro.ip-api.com/json?key=YE5vykUuYWUf0ZA",
@@ -101,18 +112,18 @@
                 dataType: 'json',
                 success: function (response) {
                     userdata = [];
-                    $(response).filter(function (i,n){
+                    $(response).filter(function (i, n) {
                         node = {
-                            'ip' : n.query,
+                            'ip': n.query,
                         }
-                        userdata.push( node );
+                        userdata.push(node);
                     });
                     userAlldata = response;
                     // console.log(data);
                     var ul = $('<ul>').appendTo('#user');
 
-                    $.each(userdata[0],function(key, value){
-                        content ='<li>'+key+' =  '+value+'<br /></li>';
+                    $.each(userdata[0], function (key, value) {
+                        content = '<li>' + key + ' =  ' + value + '<br /></li>';
                         $('#user').append(content);
                     });
                 },
@@ -125,41 +136,42 @@
         $('#user').user();
 
         //回傳 Record
-        var returnUrl ="https://d5a1144e.ngrok.io/v1/record/Record";
-        $.fn.myAjax = function(){
+        var returnUrl = "https://d5a1144e.ngrok.io/v1/record/Record";
+        $.fn.myAjax = function () {
             //參數
-            var eventList = {"eventList" : [
-                {
-                    "label": "slotz02",
-                    "category": "遊戲初始化",
-                    "value": 399
-                },
-                {
-                    "label": "slotz02",
-                    "category": "遊戲場景",
-                    "value": 347
-                },
-                {
-                    "label": "slotz02",
-                    "category": "登入時間",
-                    "value": 186
-                },
-                {
-                    "label": "slotz02",
-                    "category": "進入遊戲",
-                    "value": 13
-                },
-                {
-                    "label": "slotz02",
-                    "category": "啟動遊戲花費",
-                    "value": 5180
-                }],
+            var eventList = {
+                "eventList": [
+                    {
+                        "label": "slotz02",
+                        "category": "遊戲初始化",
+                        "value": 399
+                    },
+                    {
+                        "label": "slotz02",
+                        "category": "遊戲場景",
+                        "value": 347
+                    },
+                    {
+                        "label": "slotz02",
+                        "category": "登入時間",
+                        "value": 186
+                    },
+                    {
+                        "label": "slotz02",
+                        "category": "進入遊戲",
+                        "value": 13
+                    },
+                    {
+                        "label": "slotz02",
+                        "category": "啟動遊戲花費",
+                        "value": 5180
+                    }],
                 "id": "ee22dba5439f8b0cd0ea952e0fc500c4",
                 "group": "slot",
                 "game": "z02"
             }
 
-            var dt =new Date();
+            var dt = new Date();
             timestamp = dt.getTime();
             day = dt.getDate();
             var params = {
@@ -168,7 +180,7 @@
                 "cdnList": cdnResult,
                 "useRoute": "https://skycdn.nrmhp.com",
                 "timestamp": timestamp,
-                "recordIndex": "<client-detection-web_"+day+">",
+                "recordIndex": "<client-detection-web_" + day + ">",
                 //"recordIndex": "<client-detection-web_{now/d}>",
                 "recordType": "_doc",
                 "deviceType": "web"
@@ -179,32 +191,44 @@
 
             console.log(Pdata);
             $.ajax({
-                    cache: false,
-                    url: returnUrl,
-                    dataType: 'json',
-                    data:Pdata,
-                    method: 'POST',
-                    success: function (response) {
-                        console.log(response);
-                        $('#apiResult').html(response.msg);
-                    },
-                    error: function (jqXHR) {
-                        console.log('ERROR! \n %s', JSON.stringify(jqXHR));
-                    }
+                cache: false,
+                url: returnUrl,
+                dataType: 'json',
+                data: Pdata,
+                method: 'POST',
+                success: function (response) {
+                    console.log(response);
+                    $('#apiResult').html(response.msg);
+                },
+                error: function (jqXHR) {
+                    console.log('ERROR! \n %s', JSON.stringify(jqXHR));
+                }
             });
         }
 
         //排序處理 所有 偵測連結事件
         var queue = [];
         var cdnResult = [];
-        $.fn.execute_queue = function(param){
+        $.fn.execute_queue = function (param) {
             start_time = 0;
-            var request_time1,request_time2,request_time3;
+            var request_time1, request_time2, request_time3;
             queryUrl = queue[param]["href"];
+
             $.ajax({
                 cache: false,
                 url: queryUrl,
+                timeout: 3000, //超時時間：3秒
                 method: 'GET',
+                error: function () { //錯誤處理
+                    console.log(queue[param]["name"] + '1.timeout超過3秒');
+                    request_time = [9999, 9999, 9999];
+                    node = {
+                        'id': queue[param]["name"],
+                        'url': queue[param]["href"],
+                        'responseTimeList': request_time,
+                    }
+                    cdnResult.push(node);
+                },
                 beforeSend: function (request, settings) {
                     start_time1 = new Date().getTime();
                 },
@@ -214,7 +238,18 @@
                     $.ajax({
                         cache: false,
                         url: queryUrl,
+                        timeout: 3000, //超時時間：3秒
                         method: 'GET',
+                        error: function () {  //錯誤處理
+                            console.log(queue[param]["name"] + '2.timeout超過3秒');
+                            request_time = [request_time1, 9999, 9999];
+                            node = {
+                                'id': queue[param]["name"],
+                                'url': queue[param]["href"],
+                                'responseTimeList': request_time,
+                            }
+                            cdnResult.push(node);
+                        },
                         beforeSend: function (request, settings) {
                             start_time2 = new Date().getTime();
                         },
@@ -224,85 +259,96 @@
                             $.ajax({
                                 cache: false,
                                 url: queryUrl,
+                                timeout: 3000, //超時時間：3秒
                                 method: 'GET',
+                                error: function () {  //錯誤處理
+                                    console.log(queue[param]["name"] + '3.timeout超過2秒');
+                                    request_time = [request_time1, request_time2, 9999];
+                                    node = {
+                                        'id': queue[param]["name"],
+                                        'url': queue[param]["href"],
+                                        'responseTimeList': request_time,
+                                    }
+                                    cdnResult.push(node);
+                                },
                                 beforeSend: function (request, settings) {
                                     start_time3 = new Date().getTime();
                                 },
                                 success: function (response) {
                                     request_time3 = new Date().getTime() - start_time3;
                                     //console.log(request_time3);
-
-
-                                    $('#result').append(queue[param]["name"] +"  =  "+request_time1+"  "+request_time2+"  "+request_time3+"  "+"<br/>");
-                                    request_time = [request_time1,request_time2,request_time3];
+                                    $('#result').append(queue[param]["name"] + "  =  " + request_time1 + "  " + request_time2 + "  " + request_time3 + "  " + "<br/>");
+                                    request_time = [request_time1, request_time2, request_time3];
                                     node = {
-                                        'id' : queue[param]["name"],
-                                        'url' : queue[param]["href"],
-                                        'responseTimeList' : request_time,
+                                        'id': queue[param]["name"],
+                                        'url': queue[param]["href"],
+                                        'responseTimeList': request_time,
                                     }
-
-                                    param++;    // going to next queue entry
-                                    // check if it exists
-                                    try
-                                    {
-                                        if (queue[param]["href"] !== undefined)
-                                        {
+                                    try {
+                                        if (queue[param]["href"] !== undefined) {
                                             cdnResult.push(node);
-                                            ajaxtimerId = setTimeout(function(){
-                                                //run next item
-                                                $(this).execute_queue(param);
-                                            },1000); //every 1000 ms
                                         }
-                                    }
-                                    catch(e)
-                                    {
-                                        if(param >2) //排除單一URL測試
-                                            $(this).myAjax(); // go!
+                                    } catch (e) {
+                                        console.log(e);
                                     }
 
                                 }
                             });
                         }
                     });
-
-
                 }
             });
         }
 
         //點擊事件
-        $('#all a').click(function(e) {
+        $('#all a').click(function (e) {
+            //初始化
             repeatTime = 0;
+            cdnResult = [];
             clearTimeout(timerId);
+
+            //時間
             timerId = setTimeout(function request() {
                 var repeatTime = parseInt($('#repeatTime').val());
                 timerId = setTimeout(request, repeatTime);
                 //清空result
                 $('#result').html("");
+
+                //偵測結果 有資料才送出(第一次不會送出)，預設每 3 秒 發送結果進去 kibana
+                if (cdnResult.length > 0) {
+                    // console.log("length = " + cdnResult.length + " data =  ");
+                    // console.log(cdnResult);
+                    $(this).myAjax(); // go!
+                }
+                //偵測結果 送出後清空 cdnResult
+                cdnResult = [];
+
                 //清空 queue
                 queue = [];
-                cdnResult = [];
+                //建立 queue 偵測對象
                 $('#target a').each(function () {
-                    $this =  $(this);
+                    $this = $(this);
                     // console.log($this);
-                    if($this.attr("href") != "#")
+                    if ($this.attr("href") != "#")
                         node = {
-                            'name' : $this.html(),
-                            'href' : $this.attr("href"),
+                            'name': $this.html(),
+                            'href': $this.attr("href"),
                         }
                     queue.push(node);
                 })
 
-                var index = 0;
-                $(this).execute_queue(index); // go!
+                // 群發 偵測 queue 的 CDN
+                for (i = 0; i < queue.length; i++) {
+                    $(this).execute_queue(i); // go!
+                }
 
                 e.preventDefault();
                 return false;
-            },repeatTime); //by input value
+            }, repeatTime); //by input value
         });
 
         //點擊事件
-        $('#target a').click(function(e) {
+        $('#target a').click(function (e) {
             clearTimeout(timerId);
             $this = $(this);
             repeatTime = 0;
@@ -313,23 +359,24 @@
                 $('#result').html("");
                 //清空 queue
                 queue = [];
+
                 cdnResult = [];
-                if($this.attr("href") != "#")
+                if ($this.attr("href") != "#")
                     node = {
-                        'name' : $this.html(),
-                        'href' : $this.attr("href"),
+                        'name': $this.html(),
+                        'href': $this.attr("href"),
                     }
                 queue.push(node);
                 // console.log(queue);
                 var index = 0;
                 $(this).execute_queue(index); // go!
-            },repeatTime); //by input value
+            }, repeatTime); //by input value
             e.preventDefault();
             return false;
         });
 
         //程式開始
-        $('#all a').trigger( "click" );
+        $('#all a').trigger("click");
     });
 </script>
 </html>
